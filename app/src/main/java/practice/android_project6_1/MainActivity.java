@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Chronometer;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -45,19 +46,28 @@ public class MainActivity extends AppCompatActivity {
         ti = (TimePicker) findViewById(R.id.timePicker);
         ca = (CalendarView) findViewById(R.id.calendarView);
 
-        r1.setChecked(true);
-        ti.setVisibility(View.GONE);
-        ca.setVisibility(View.VISIBLE);
+        r1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(r1.isChecked() == true)
+                {
+                    ti.setVisibility(View.INVISIBLE);
+                    ca.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
+        r2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(r2.isChecked() == true)
+                {
+                    ca.setVisibility(View.INVISIBLE);
+                    ti.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
-        if(r2.isChecked())
-        {
-            ca.setVisibility(View.GONE);
-            ti.setVisibility(View.VISIBLE);
-        }
-        else
-            ti.setVisibility(View.GONE);
-            ca.setVisibility(View.VISIBLE);
 
         b2 = (Button) findViewById(R.id.button2);
         b2.setOnClickListener(new View.OnClickListener() {
