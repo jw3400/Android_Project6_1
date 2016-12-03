@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     CalendarView ca;
     TextView t1;
 
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    int hour = 0;
+    int min = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +75,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         b2 = (Button) findViewById(R.id.button2);
+        t1 = (TextView) findViewById(R.id.textView3);
+
+        ca.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int i, int j, int k) {
+                year=i;
+                month=j;
+                day=k;
+            }
+        });
+
+        ti.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int i, int j) {
+                hour=i;
+                min=j;
+            }
+        });
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                ch.stop();
+                ch.setTextColor(Color.BLUE);
+                t1.setText(year+"년"+month+"월"+day+"일"+" "+hour+"시"+min+"분"+" 예약됨");
             }
         });
-        t1 = (TextView) findViewById(R.id.textView3);
+
 
 
 
