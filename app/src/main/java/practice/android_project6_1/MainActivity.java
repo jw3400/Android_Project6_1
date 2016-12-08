@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int day = 0;
     int hour = 0;
     int min = 0;
+    int flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(flag==0)
+                {
+                    flag=1;
+                }
+                else if(flag==1)
+                {
+                    Toast.makeText(getApplicationContext(),"예약을 완료해주세요.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ch.setBase(SystemClock.elapsedRealtime());
                 ch.start();
                 ch.setTextColor(Color.RED);
@@ -97,10 +108,20 @@ public class MainActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(flag==0)
+                {
+                    Toast.makeText(getApplicationContext(),"예약 시작버튼을 누르고 하셔야합니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(year==0 || hour==0)
+                {
+                    Toast.makeText(getApplicationContext(),"날짜 혹은 시간을 체크 하셔야합니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ch.stop();
                 ch.setTextColor(Color.BLUE);
                 t1.setText(year+"년"+month+"월"+day+"일"+" "+hour+"시"+min+"분"+" 예약됨");
+                flag=0;
             }
         });
 
